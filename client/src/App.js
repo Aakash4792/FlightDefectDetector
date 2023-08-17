@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import axios from "axios";
+import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import LoginScreen from "./components/LoginScreen/LoginScreen";
+import RootLayout from "./components/RootLayout/RootLayout";
+import HomePage from "./components/HomePage/HomePage";
+import AuthProvider from "./store/AuthProvider";
+
+axios.defaults.baseURL = "http://localhost:4000";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LoginScreen />,
+  },
+  {
+    path: "/homepage",
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+    ],
+  },
+]);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   );
 }
 
