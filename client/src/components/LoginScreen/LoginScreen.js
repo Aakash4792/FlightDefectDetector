@@ -6,7 +6,7 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LoginScreen = () => {
-  const { loginWithRedirect, logout, user, isAuthenticated } =
+  const { loginWithPopup, logout, user, isAuthenticated } =
     useContext(AuthContext);
   //  console.log(loginWithRedirect, logout, user, isAuthenticated);
 
@@ -26,7 +26,7 @@ const LoginScreen = () => {
       <div className="right-column">
         <div className="header">Login</div>
         <div className="empty-div">
-          <GoogleButton onClick={loginWithRedirect} />
+          <GoogleButton onClick={loginWithPopup} />
         </div>
         {/* {isAuthenticated && (
           <div>

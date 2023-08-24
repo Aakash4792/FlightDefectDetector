@@ -1,0 +1,43 @@
+/* .button {
+  margin: 0 auto;
+  display: block;
+  background: crimson;
+  text-align: center;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  border-color: white;
+  width: 150px;
+}
+
+.popupWrapper {
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  height: 250px;
+  background: white;
+}
+.close {
+  position: absolute;
+  right: 5px;
+  top: 0;
+  cursor: pointer;
+} */

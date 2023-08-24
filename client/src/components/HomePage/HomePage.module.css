@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  padding-top: 2rem;
+  height: auto;
+}
+
+.container > div {
+  margin: 1rem auto;
+}
+.header {
+  font-size: 2rem;
+  font-weight: bold;
+}

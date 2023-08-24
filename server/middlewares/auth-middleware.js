@@ -25,6 +25,7 @@ const setupUserInfo = (req, res, next) => {
       })
       .then((response) => {
         req.user = response.data;
+        console.log(req.user);
         next();
       })
       .catch((err) => {

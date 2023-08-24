@@ -3,8 +3,9 @@ import axios from "axios";
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginScreen from "./components/LoginScreen/LoginScreen";
-import RootLayout from "./components/RootLayout/RootLayout";
 import HomePage from "./components/HomePage/HomePage";
+import History from "./components/History/History";
+import Query from "./components/Query/Query";
 import AuthProvider from "./store/AuthProvider";
 
 axios.defaults.baseURL = "http://localhost:4000";
@@ -16,13 +17,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/homepage",
-    element: <RootLayout />,
-    children: [
-      {
-        index: true,
-        element: <HomePage />,
-      },
-    ],
+    element: <HomePage />,
+  },
+  {
+    path: "/history",
+    element: <History />,
+  },
+  {
+    path: "/history/:id",
+    element: <Query />,
   },
 ]);
 

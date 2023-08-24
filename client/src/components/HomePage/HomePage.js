@@ -1,13 +1,15 @@
 import axios from "axios";
 import MainNavigation from "../MainNav/MainNavigation";
+import InputForm from "../InputForm/InputForm";
 import AuthContext from "../../store/auth-context";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { callProtectedAPI } from "../../utils/callProtectedAPI";
+import classes from "./HomePage.module.css";
 const HomePage = () => {
-  const { user, isAuthenticated, getAccessTokenSilently } =
+  const { user, isAuthenticated, getAccessTokenSilently, analysisSet } =
     useContext(AuthContext);
-  console.log(user, isAuthenticated);
+  console.log(user, isAuthenticated, analysisSet);
 
   const navigate = useNavigate();
 
@@ -35,7 +37,7 @@ const HomePage = () => {
   return (
     <>
       <MainNavigation />
-      <div>Home Page</div>
+      {/* <div>Home Page</div>
       <ul>
         <li>
           <button onClick={callAPI}>Call API</button>
@@ -43,7 +45,11 @@ const HomePage = () => {
         <li>
           <button onClick={callSecAPI}>Call protected API</button>
         </li>
-      </ul>
+      </ul> */}
+      <div className={classes.container}>
+        <div className={classes.header}>Hi there, !</div>
+        <InputForm />
+      </div>
     </>
   );
 };

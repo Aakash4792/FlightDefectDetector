@@ -1,5 +1,12 @@
 import axios from "axios";
-export async function callProtectedAPI(getAccessTokenSilently, method, route) {
+export async function callProtectedAPI(
+  getAccessTokenSilently,
+  method,
+  route,
+  payload = {},
+  headers = {},
+  afterPost = () => {}
+) {
   try {
     const token = await getAccessTokenSilently({
       authorizationParams: {
@@ -17,9 +24,19 @@ export async function callProtectedAPI(getAccessTokenSilently, method, route) {
       });
       return response.data;
     } else if (method === "POST") {
+      axios
+        .post(route, payload, {
+          headers: { Authorization: `Bearer ${token}`, ...headers },
+        })
+        .then((response) => {
+          console.log("resp : ", response);
+          afterPost(response);
+          return response;
+        });
+    } else {
+      console.log("invalid method call");
+      return { error: "invalid method call" };
     }
-    console.log("invalid method call");
-    return { error: "invalid method call" };
   } catch (error) {
     console.log(error.message);
     return { error: error.message };
