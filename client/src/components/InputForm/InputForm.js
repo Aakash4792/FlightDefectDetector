@@ -16,7 +16,7 @@ const InputForm = () => {
   const [selectedPhotos, setSelectedPhotos] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [numberInput1, setNumberInput1] = useState(0);
-  const [numberInput2, setNumberInput2] = useState(0);
+  const [selectedNumber, setSelectedNumber] = useState("");
 
   const handleFlightChange = (event) => {
     console.log(event.target.value);
@@ -33,9 +33,9 @@ const InputForm = () => {
     setNumberInput1(event.target.value);
   };
 
-  const handleNumberInput2Change = (event) => {
-    console.log(event.target.value);
-    setNumberInput2(event.target.value);
+  const handleNumberChange = (e) => {
+    console.log(e.target.value);
+    setSelectedNumber(e.target.value);
   };
 
   const afterPostUpload = (response) => {
@@ -77,6 +77,10 @@ const InputForm = () => {
       alert("Please select a flight.");
       return false;
     }
+    if (!selectedNumber) {
+      alert("Please enter a flight number.");
+      return false;
+    }
 
     if (selectedPhotos.length === 0) {
       alert("Please upload at least one photo.");
@@ -88,7 +92,7 @@ const InputForm = () => {
       return false;
     }
 
-    if (numberInput1 <= 0 || numberInput2 <= 0) {
+    if (numberInput1 <= 0) {
       alert("Hours of flight and miles travelled must be greater than 0.");
       return false;
     }
@@ -115,7 +119,7 @@ const InputForm = () => {
           photos: selectedPhotos,
           manufacturingDate: selectedDate,
           hoursOfFlight: numberInput1,
-          milesTravelled: numberInput2,
+          flightNumber: selectedNumber,
         };
         await callProtectedAPI(
           getAccessTokenSilently,
@@ -132,7 +136,7 @@ const InputForm = () => {
           photos: selectedPhotos,
           manufacturingDate: selectedDate,
           hoursOfFlight: numberInput1,
-          milesTravelled: numberInput2,
+          flightNumber: selectedNumber,
         };
         const token = await getAccessTokenSilently({
           authorizationParams: {
@@ -160,7 +164,15 @@ const InputForm = () => {
     <div className={classes.formDiv}>
       <h2>Enter details</h2>
       <div>
-        <label>Select Flight:</label>
+        <label>Flight Number:</label>
+        <input
+          type="text"
+          value={selectedNumber}
+          onChange={handleNumberChange}
+        />
+      </div>
+      <div>
+        <label>Flight Type:</label>
         <select value={selectedFlight} onChange={handleFlightChange}>
           <option value="">Select a flight</option>
           <option value="Flight A">Flight A</option>
@@ -194,14 +206,6 @@ const InputForm = () => {
           type="number"
           value={numberInput1}
           onChange={handleNumberInput1Change}
-        />
-      </div>
-      <div>
-        <label>Miles Travelled:</label>
-        <input
-          type="number"
-          value={numberInput2}
-          onChange={handleNumberInput2Change}
         />
       </div>
       <div>

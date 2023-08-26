@@ -61,7 +61,7 @@ app.get("/analysis", async (req, res) => {
   }
 });
 
-const buildAnalysisObject = (qid, summary, images) => {
+const buildAnalysisObject = (qid, summary, images, flightInfo) => {
   const id = qid;
   const date = new Date();
   const image_analysis = images.map((image) => {
@@ -73,7 +73,7 @@ const buildAnalysisObject = (qid, summary, images) => {
       data: image.data,
     };
   });
-  return { id, date, summary, image_analysis };
+  return { id, date, summary, image_analysis, flightInfo };
 };
 async function sendFilesToFlask(qid, requestData, mail) {
   const form = new FormData();
@@ -87,7 +87,7 @@ async function sendFilesToFlask(qid, requestData, mail) {
   form.append("selectedFlight", requestData.flight);
   form.append("selectedDate", requestData.manufacturingDate);
   form.append("numberInput1", requestData.hoursOfFlight);
-  form.append("numberInput2", requestData.milesTravelled);
+  form.append("flightNumber", requestData.flightNumber);
 
   try {
     let response = await axios.post(FLASK_URL + "/flask", form, {
@@ -112,7 +112,8 @@ async function sendFilesToFlask(qid, requestData, mail) {
     const object = buildAnalysisObject(
       qid,
       response.data.summary,
-      uploadedPhotos
+      uploadedPhotos,
+      response.data.flight_info
     );
     return object;
   } catch (error) {

@@ -47,7 +47,7 @@ const HomePage = () => {
         </li>
       </ul> */}
       <div className={classes.container}>
-        <div className={classes.header}>Hi there, !</div>
+        <div className={classes.header}>Hi there, {user?.name}!</div>
         <InputForm />
       </div>
     </>
