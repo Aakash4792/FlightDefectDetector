@@ -1,18 +1,21 @@
-const Gallery = ({ photos, setImg, setClicked, analysis }) => {
-  const handleClick = (link, idx) => {
-    console.log(link, " clicked");
+const Gallery = ({ setImg, setClicked, analysis }) => {
+  const handleClick = (image, idx) => {
+    console.log(image, " clicked");
     setClicked(true);
-    setImg({ link, ...analysis.image_analysis[idx] });
+    setImg({ ...image });
   };
+
   return (
     <div>
-      {photos.length > 0 &&
-        photos.map((link, idx) => (
+      {analysis.image_analysis.length > 0 &&
+        analysis.image_analysis.map((image, idx) => (
           <img
-            src={link}
+            src={`data:image/${
+              image.filename.split(".")[image.filename.split(".").length - 1]
+            };base64,${image.data}`}
             style={{ width: "200px", height: "200px", cursor: "pointer" }}
-            key={link}
-            onClick={() => handleClick(link, idx)}
+            key={idx}
+            onClick={() => handleClick(image, idx)}
           />
         ))}
     </div>

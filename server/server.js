@@ -23,7 +23,7 @@ mongoose
 const app = express();
 
 app.use("/uploads", express.static(__dirname + "/uploads"));
-app.use("/analyzedPhotos", express.static(__dirname + "/analyzedPhotos"));
+// app.use("/analyzedPhotos", express.static(__dirname + "/analyzedPhotos"));
 app.use(express.json());
 app.use(cors());
 
@@ -71,6 +71,11 @@ const buildAnalysisObject = (qid, summary, images, flightInfo) => {
       image_id: image.image_id,
       image_link: image.image_link,
       data: image.data,
+      0: image["0"],
+      1: image["1"],
+      2: image["2"],
+      3: image["3"],
+      4: image["4"],
     };
   });
   return { id, date, summary, image_analysis, flightInfo };

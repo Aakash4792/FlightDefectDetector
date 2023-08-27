@@ -1,8 +1,8 @@
+import tableData from "../../store/tableData.js";
 import { useState, useEffect } from "react";
 import classes from "./DefectAnalysis.module.css";
 const DefectAnalysis = ({ img, setClicked, setImg }) => {
   console.log("img : ", img);
-  const link = img.link;
 
   //img.defects;
   const defects = img.defects;
@@ -44,7 +44,12 @@ const DefectAnalysis = ({ img, setClicked, setImg }) => {
             position: "relative",
           }}
         >
-          <img src={link} style={{ maxHeight: "100%", maxWidth: "100%" }} />
+          <img
+            src={`data:image/${
+              img.filename.split(".")[img.filename.split(".").length - 1]
+            };base64,${img.data}`}
+            style={{ maxHeight: "100%", maxWidth: "100%" }}
+          />
           {defects.map((defect, index) => (
             <div
               key={index}
@@ -69,8 +74,13 @@ const DefectAnalysis = ({ img, setClicked, setImg }) => {
           </h4>
           {hoveredDefect && (
             <div>
-              <h1>{hoveredDefect.defectName}</h1>
-              <p>{hoveredDefect.defectContent}</p>
+              <h1>Type : {tableData[hoveredDefect.type].name}</h1>
+              <p>Severity : {hoveredDefect.severity}</p>
+              <p>Size : {hoveredDefect.size}</p>
+              <p>Causes : {tableData[hoveredDefect.type].causes}</p>
+              <p>Affects : {tableData[hoveredDefect.type].affects}</p>
+              <p>Solutions : {tableData[hoveredDefect.type].solutions}</p>
+              <p>Preventions : {tableData[hoveredDefect.type].preventions}</p>
             </div>
           )}
           {/* <h1>Defect Name</h1>
