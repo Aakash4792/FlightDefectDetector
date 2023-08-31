@@ -7,10 +7,18 @@
   height: auto;
 }
 
+html,
+body {
+  
+}
+
+
 .container > div {
   margin: 1rem auto;
 }
+
 .header {
   font-size: 2rem;
   font-weight: bold;
+  color: black;
 }

@@ -6,6 +6,8 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { callProtectedAPI } from "../../utils/callProtectedAPI";
 import classes from "./HomePage.module.css";
+import { CDBInput,CDBCard, CDBCardBody, CDBBtn, CDBLink, CDBContainer } from 'cdbreact';
+
 const HomePage = () => {
   const { user, isAuthenticated, getAccessTokenSilently, analysisSet } =
     useContext(AuthContext);
@@ -46,8 +48,12 @@ const HomePage = () => {
           <button onClick={callSecAPI}>Call protected API</button>
         </li>
       </ul> */}
-      <div className={classes.container}>
+
+      <div className="text-center text-white" style={{width: '30rem' ,margin: 'center', width: '100%', padding: '2% 10% 2% 10%' }}>
         <div className={classes.header}>Hi there, {user?.name}!</div>
+      </div>
+
+      <div className={classes.container}>
         <InputForm />
       </div>
     </>

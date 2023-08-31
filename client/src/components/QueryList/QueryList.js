@@ -6,6 +6,7 @@ function QueryList(props) {
   if (props.items.length === 0)
     return <h2 className="query-list__fallback">No queries yet</h2>;
 
+console.log(props.items)
   return (
     <ul className="query-list">
       {props.items.map((query, idx) => (

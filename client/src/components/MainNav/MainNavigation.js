@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import AuthContext from "../../store/auth-context";
+import {CDBInput,CDBCard, CDBCardBody, CDBBtn, CDBLink, CDBContainer, CDBSelect} from 'cdbreact';
 import {
   Nav,
   NavLink,
@@ -33,7 +34,9 @@ function MainNavigation() {
           {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
         </NavMenu>
         <NavBtn>
-          <button onClick={logout}>Logout</button>
+          <CDBBtn onClick={logout} color="light" outline className="btn-block my-3 mx-0">
+            Logout
+        </CDBBtn>
         </NavBtn>
       </Nav>
     </>
