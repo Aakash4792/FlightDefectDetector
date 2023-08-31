@@ -283,8 +283,6 @@ async function generatePDF(email, data) {
     await createTable(doc, defectsBySize);
     doc.moveDown();
   }
-  doc.addPage();
-  doc.fontSize(14).text("Appendix");
   doc.end();
   await new Promise((resolve) => writeStream.on("finish", resolve));
   return { filename, filePath };

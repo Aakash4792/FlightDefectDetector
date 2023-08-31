@@ -487,11 +487,6 @@ const PDFComponent = ({ id, date, flightInfo, image_analysis, summary }) => {
           </View>
         </Page>
       ))}
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text>Appendix</Text>
-        </View>
-      </Page>
     </Document>
   );
 };
