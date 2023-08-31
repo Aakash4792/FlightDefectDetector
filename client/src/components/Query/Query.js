@@ -52,16 +52,7 @@ const Query = () => {
       <h1>Query {params.id}</h1>
       {!clicked && (
         <div>
-          <div
-            style={{
-              width: "100%",
-              display: "grid",
-              gridTemplateRows: "1fr 1fr",
-              gridTemplateColumns: "1fr 1fr",
-              gridGap: "10px",
-              margin: "1rem auto",
-            }}
-          >
+          <div>
             <div>Flight Number : {analysis.flightInfo.flight_number}</div>
             <div>Flight Type : {analysis.flightInfo.selected_flight}</div>
             <div>Manufacturing date : {analysis.flightInfo.selected_date}</div>

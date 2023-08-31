@@ -18,7 +18,6 @@ const History = () => {
   return (
     <>
       <MainNavigation />
-      <div>History</div>
       <div style={{ padding: "2rem" }}>
         <QueryList items={queries} />
       </div>

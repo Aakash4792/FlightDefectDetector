@@ -1,7 +1,24 @@
 import React from "react";
 import Card from "../Card/Card";
-import { Link } from "react-router-dom";
+import { NavLink as Link } from "react-router-dom";
+import styled from "styled-components";
+import {CDBInput,CDBCard, CDBCardBody, CDBBtn, CDBLink, CDBContainer, CDBSelect} from 'cdbreact';
 import "./QueryItem.css";
+
+
+export const NavLink = styled(Link)`
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  cursor: pointer;
+  &.active {
+   
+  }
+`;
+
 
 function QueryItem({ date, id }) {
   date = new Date(date);
@@ -16,9 +33,11 @@ function QueryItem({ date, id }) {
           <h2>
             Analysis - {id} - {`${day}/${month}/${year}`}
           </h2>
-          <Link to={`/history/${id}`}>
-            <button>View Details</button>
-          </Link>
+          <NavLink to={`/history/${id}`}>
+          <CDBBtn color="dark" outline className="btn-block my-3 mx-0">
+            View Details
+        </CDBBtn>
+          </NavLink>
         </div>
       </Card>
     </li>

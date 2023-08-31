@@ -1,9 +1,3 @@
-.fileInput {
-  display: none;
-}
-
-.formDiv {
-  margin: 1rem auto;
-  display: flex;
-  flex-direction: column;
+.CDBInput{
+    margin-bottom: 0px;
 }

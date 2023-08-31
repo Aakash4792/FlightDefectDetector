@@ -6,6 +6,8 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./InputForm.module.css";
 import axios from "axios";
+import {CDBInput,CDBCard, CDBCardBody, CDBBtn, CDBLink, CDBContainer, CDBSelect} from 'cdbreact';
+
 
 const InputForm = () => {
   const navigate = useNavigate();
@@ -159,59 +161,51 @@ const InputForm = () => {
       }
     }
   };
+  const option = [
+    {
+      text: 'Flight A',
+      value: 'Flight A',
+    },
+    {
+      text: 'Flight B',
+      value: 'Flight B',
+    },
+    {
+      text: 'Flight C',
+      value: 'Flight C',
+    },
+  ];
 
-  return (
-    <div className={classes.formDiv}>
-      <h2>Enter details</h2>
-      <div>
-        <label>Flight Number:</label>
-        <input
-          type="text"
-          value={selectedNumber}
-          onChange={handleNumberChange}
-        />
+  return (  
+    <CDBContainer style={{ display: 'inline-block',width:"40rem"}}>    
+    <CDBCard style={{ margin: 'center', padding:'0%', margin:'0%'}}>
+      <div className="text-center text-white" style={{ background: 'black', padding:'0%', margin:'0%' }}>
+        <p className="h5 mt-2 py-4 font-weight-bold">Enter details</p>
       </div>
-      <div>
-        <label>Flight Type:</label>
-        <select value={selectedFlight} onChange={handleFlightChange}>
-          <option value="">Select a flight</option>
-          <option value="Flight A">Flight A</option>
-          <option value="Flight B">Flight B</option>
-          <option value="Flight C">Flight C</option>
-        </select>
-      </div>
-      <div>
-        <div>
-          <label htmlFor="file-input">Upload Photos</label>
-          <input
-            type="file"
-            id="file-input"
-            name="file-input"
-            className={classes.fileInput}
-            multiple
-            onChange={uploadPhoto}
-            accept="image/*"
-          />
-        </div>
-
+      <CDBCardBody className="mx-4">
+       {/* <p className="text-center mt-2">
+          Join our mailing list. We write rarely, but only the best content.
+        </p>
+        <CDBLink className="text-center p-0" to="#">
+          See the last newsletter
+  </CDBLink>*/}
+        <CDBInput label="Flight Number:" type="text" value={selectedNumber}
+          onChange={handleNumberChange} />
+        <p className="text-left m-0">Flight Type:</p>
+        <CDBSelect options={option}  value={selectedFlight} onChange={handleFlightChange} style={{ height:'2.5rem', width: '30rem' ,margin: 'center', width: '100%', color:'none' }} />
+        <CDBInput label="Upload photos: " type="file" id="file-input" name="file-input" className={classes.fileInput} multiple onChange={uploadPhoto} accept="image/*"  style={{ height:'2.5rem', width: '30rem' ,margin: 'center', width: '100%', color:'#AFAFAF' }}/>
         <UploadedPhotos photos={selectedPhotos} removePhoto={removePhoto} />
-      </div>
-      <div>
-        <label>Manufacturing Date:</label>
-        <input type="date" value={selectedDate} onChange={handleDateChange} />
-      </div>
-      <div>
-        <label>Hours of Flight:</label>
-        <input
-          type="number"
-          value={numberInput1}
-          onChange={handleNumberInput1Change}
-        />
-      </div>
-      <div>
-        <button onClick={analyze}>Analyze</button>
-      </div>
-    </div>
+        <CDBInput label="Manufacturing Date: " type="date" value={selectedDate}
+          onChange={handleDateChange} />
+        <CDBInput label="Hours of Flight: " type="number" value={numberInput1}
+          onChange={handleNumberInput1Change} />
+        <CDBBtn onClick={analyze} color="dark" outline className="btn-block my-3 mx-0">
+          Analyze
+        </CDBBtn>
+      </CDBCardBody>
+    </CDBCard>
+  </CDBContainer>
+    
   );
 };
 
