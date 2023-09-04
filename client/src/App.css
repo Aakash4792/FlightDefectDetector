@@ -7,7 +7,7 @@ html,
 }
 
 /* Overall container */
-.container {
+.container-login {
   display: flex;
   flex-direction: row;
   width: 100%;

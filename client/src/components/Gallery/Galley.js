@@ -1,3 +1,5 @@
+import classes from "./Galley.module.css";
+
 const Gallery = ({ setImg, setClicked, analysis }) => {
   const handleClick = (image, idx) => {
     console.log(image, " clicked");
@@ -6,7 +8,7 @@ const Gallery = ({ setImg, setClicked, analysis }) => {
   };
 
   return (
-    <div>
+    <div className={classes.galleyImageContainer}>
       {analysis.image_analysis.length > 0 &&
         analysis.image_analysis.map((image, idx) => (
           <img

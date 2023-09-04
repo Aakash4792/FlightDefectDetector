@@ -20,10 +20,21 @@ mongoose
   })
   .catch((err) => console.log(err.message));
 
+if (!fs.existsSync("./analyzedPhotos")) {
+  fs.mkdirSync("./analyzedPhotos");
+}
+if (!fs.existsSync("./uploads")) {
+  fs.mkdirSync("./uploads");
+}
+if (!fs.existsSync("./analyzedPDFs")) {
+  fs.mkdirSync("./analyzedPDFs");
+}
+
 const app = express();
 
 app.use("/uploads", express.static(__dirname + "/uploads"));
 // app.use("/analyzedPhotos", express.static(__dirname + "/analyzedPhotos"));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(cors());
 
@@ -93,6 +104,7 @@ async function sendFilesToFlask(qid, requestData, mail) {
   form.append("selectedDate", requestData.manufacturingDate);
   form.append("numberInput1", requestData.hoursOfFlight);
   form.append("flightNumber", requestData.flightNumber);
+  form.append("user_id", mail);
 
   try {
     let response = await axios.post(FLASK_URL + "/flask", form, {
@@ -208,6 +220,6 @@ app.post("/upload", photosMiddleware.array("photos", 100), (req, res) => {
   res.json(uploadedFiles);
 });
 
-app.listen(4000, () => {
-  console.log("Server on port 4000");
+app.listen(8000, () => {
+  console.log("Server on port 8000");
 });

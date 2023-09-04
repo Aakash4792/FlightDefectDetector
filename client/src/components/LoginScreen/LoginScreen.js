@@ -16,10 +16,10 @@ const LoginScreen = () => {
     if (isAuthenticated) {
       navigate("/homepage");
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated]);
 
   return (
-    <div className="container">
+    <div className="container-login">
       <div className="left-column">
         <h1 className="header">Flight Defect Detector</h1>
       </div>

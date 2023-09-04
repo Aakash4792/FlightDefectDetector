@@ -11,7 +11,7 @@ const History = () => {
     if (!isAuthenticated) {
       navigate("/");
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated]);
 
   const queries = analysisSet;
 

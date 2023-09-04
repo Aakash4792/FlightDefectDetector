@@ -1,14 +1,33 @@
+import classes from "./UploadedPhotos.module.css";
 const UploadedPhotos = ({ photos, removePhoto }) => {
   return (
-    <div>
+    <div className={classes.photosContainer}>
       {photos.length > 0 &&
         photos.map((link) => (
-          <div key={link}>
+          <div
+            key={link}
+            style={{ position: "relative", display: "inline-block" }}
+          >
             <img
-              src={"http://localhost:4000/uploads/" + link}
-              style={{ width: "100px", height: "100px" }}
+              src={"http://localhost:8000/uploads/" + link}
+              style={{ width: "140px", height: "140px" }}
             />
-            <button onClick={(e) => removePhoto(e, link)}>X</button>
+            <button
+              style={{
+                position: "absolute",
+                top: "0",
+                right: "0",
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                color: "#fff",
+                border: "none",
+                padding: "5px 10px",
+                cursor: "pointer",
+                borderBottomLeftRadius: "20%",
+              }}
+              onClick={(e) => removePhoto(e, link)}
+            >
+              X
+            </button>
           </div>
         ))}
     </div>

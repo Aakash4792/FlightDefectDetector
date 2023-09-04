@@ -410,7 +410,9 @@ const PDFComponent = ({ id, date, flightInfo, image_analysis, summary }) => {
                 </Text>
               </View>
               <View style={styles.tableCol4}>
-                <Text style={styles.tableCell}>{summary.total_defects}</Text>
+                <Text style={styles.tableCell}>
+                  {imageAnalysis.defects.length}
+                </Text>
               </View>
             </View>
           </View>
@@ -481,7 +483,9 @@ const PDFComponent = ({ id, date, flightInfo, image_analysis, summary }) => {
                 </Text>
               </View>
               <View style={styles.tableCol4}>
-                <Text style={styles.tableCell}>{summary.total_defects}</Text>
+                <Text style={styles.tableCell}>
+                  {imageAnalysis.defects.length}
+                </Text>
               </View>
             </View>
           </View>

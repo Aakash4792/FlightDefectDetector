@@ -6,19 +6,30 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./InputForm.module.css";
 import axios from "axios";
-import {CDBInput,CDBCard, CDBCardBody, CDBBtn, CDBLink, CDBContainer, CDBSelect} from 'cdbreact';
-
+import ReactLoading from "react-loading";
+import {
+  CDBInput,
+  CDBCard,
+  CDBCardBody,
+  CDBBtn,
+  CDBLink,
+  CDBContainer,
+  CDBSelect,
+} from "cdbreact";
 
 const InputForm = () => {
   const navigate = useNavigate();
 
-  const { getAccessTokenSilently, setAnalysisSet } = useContext(AuthContext);
+  const { getAccessTokenSilently, setAnalysisSet, user } =
+    useContext(AuthContext);
 
   const [selectedFlight, setSelectedFlight] = useState("");
   const [selectedPhotos, setSelectedPhotos] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [numberInput1, setNumberInput1] = useState(0);
   const [selectedNumber, setSelectedNumber] = useState("");
+
+  const [analyzing, setAnalyzing] = useState(false);
 
   const handleFlightChange = (event) => {
     console.log(event.target.value);
@@ -131,6 +142,7 @@ const InputForm = () => {
           {},
           afterPostAnalyze
         );
+        return null;
       } else {
         //send mail and alert user
         const requestData = {
@@ -157,55 +169,126 @@ const InputForm = () => {
         alert(
           "Please check your mail for the detailed report in some time...It might take some time for the report to become avaiable in your history"
         );
-        navigate(`/homepage`);
+        setAnalyzing(false);
+        navigate("/homepage");
       }
     }
   };
+
+  const handleAnalyze = () => {
+    setAnalyzing(true);
+    analyze()
+      .then(() => {
+        console.log("analysis complete");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
   const option = [
     {
-      text: 'Flight A',
-      value: 'Flight A',
+      text: "Flight A",
+      value: "Flight A",
     },
     {
-      text: 'Flight B',
-      value: 'Flight B',
+      text: "Flight B",
+      value: "Flight B",
     },
     {
-      text: 'Flight C',
-      value: 'Flight C',
+      text: "Flight C",
+      value: "Flight C",
     },
   ];
 
-  return (  
-    <CDBContainer style={{ display: 'inline-block',width:"40rem"}}>    
-    <CDBCard style={{ margin: 'center', padding:'0%', margin:'0%'}}>
-      <div className="text-center text-white" style={{ background: 'black', padding:'0%', margin:'0%' }}>
-        <p className="h5 mt-2 py-4 font-weight-bold">Enter details</p>
-      </div>
-      <CDBCardBody className="mx-4">
-       {/* <p className="text-center mt-2">
+  return (
+    <div>
+      {!analyzing && (
+        <CDBContainer style={{ display: "inline-block", width: "40rem" }}>
+          <CDBCard style={{ margin: "center", padding: "0%", margin: "0%" }}>
+            <div
+              className="text-center text-white"
+              style={{ background: "black", padding: "0%", margin: "0%" }}
+            >
+              <p className="h5 mt-2 py-4 font-weight-bold">Enter details</p>
+            </div>
+            <CDBCardBody className="mx-4">
+              {/* <p className="text-center mt-2">
           Join our mailing list. We write rarely, but only the best content.
         </p>
         <CDBLink className="text-center p-0" to="#">
           See the last newsletter
   </CDBLink>*/}
-        <CDBInput label="Flight Number:" type="text" value={selectedNumber}
-          onChange={handleNumberChange} />
-        <p className="text-left m-0">Flight Type:</p>
-        <CDBSelect options={option}  value={selectedFlight} onChange={handleFlightChange} style={{ height:'2.5rem', width: '30rem' ,margin: 'center', width: '100%', color:'none' }} />
-        <CDBInput label="Upload photos: " type="file" id="file-input" name="file-input" className={classes.fileInput} multiple onChange={uploadPhoto} accept="image/*"  style={{ height:'2.5rem', width: '30rem' ,margin: 'center', width: '100%', color:'#AFAFAF' }}/>
-        <UploadedPhotos photos={selectedPhotos} removePhoto={removePhoto} />
-        <CDBInput label="Manufacturing Date: " type="date" value={selectedDate}
-          onChange={handleDateChange} />
-        <CDBInput label="Hours of Flight: " type="number" value={numberInput1}
-          onChange={handleNumberInput1Change} />
-        <CDBBtn onClick={analyze} color="dark" outline className="btn-block my-3 mx-0">
-          Analyze
-        </CDBBtn>
-      </CDBCardBody>
-    </CDBCard>
-  </CDBContainer>
-    
+              <CDBInput
+                label="Flight Number:"
+                type="text"
+                value={selectedNumber}
+                onChange={handleNumberChange}
+              />
+              <p className="text-left m-0">Flight Type:</p>
+              <CDBSelect
+                options={option}
+                value={selectedFlight}
+                onChange={handleFlightChange}
+                style={{
+                  height: "2.5rem",
+                  width: "30rem",
+                  margin: "center",
+                  width: "100%",
+                  color: "none",
+                }}
+              />
+              <CDBInput
+                label="Upload photos: "
+                type="file"
+                id="file-input"
+                name="file-input"
+                className={classes.fileInput}
+                multiple
+                onChange={uploadPhoto}
+                accept="image/*"
+                style={{
+                  height: "2.5rem",
+                  width: "30rem",
+                  margin: "center",
+                  width: "100%",
+                  color: "#AFAFAF",
+                }}
+              />
+              <UploadedPhotos
+                photos={selectedPhotos}
+                removePhoto={removePhoto}
+              />
+              <CDBInput
+                label="Manufacturing Date: "
+                type="date"
+                value={selectedDate}
+                onChange={handleDateChange}
+              />
+              <CDBInput
+                label="Hours of Flight: "
+                type="number"
+                value={numberInput1}
+                onChange={handleNumberInput1Change}
+              />
+              <CDBBtn
+                onClick={handleAnalyze}
+                color="dark"
+                outline
+                className="btn-block my-3 mx-0"
+              >
+                Analyze
+              </CDBBtn>
+            </CDBCardBody>
+          </CDBCard>
+        </CDBContainer>
+      )}
+      {analyzing && (
+        <div className={classes.loadingContainer}>
+          <ReactLoading type="spin" color="#000" />
+          <div>Loading...</div>
+        </div>
+      )}
+    </div>
   );
 };
 

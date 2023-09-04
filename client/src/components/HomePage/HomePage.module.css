@@ -3,15 +3,8 @@
   flex-direction: column;
   width: 100%;
   align-items: center;
-  padding-top: 2rem;
   height: auto;
 }
-
-html,
-body {
-  
-}
-
 
 .container > div {
   margin: 1rem auto;

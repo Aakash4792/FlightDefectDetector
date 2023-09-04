@@ -18,6 +18,7 @@
     "react-dom": "^18.2.0",
     "react-google-button": "^0.7.2",
     "react-icons": "^4.10.1",
+    "react-loading": "^2.0.3",
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.10",
@@ -25,9 +26,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "set BUILD_PATH=../server/public&& react-scripts build",
+    "test": "react-scripts test --passWithNoTests",
+    "eject": "react-scripts eject",
+    "client-build": "BUILD_PATH=../server/public react-scripts build"
   },
   "eslintConfig": {
     "extends": [
