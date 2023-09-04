@@ -9,7 +9,7 @@ const UploadedPhotos = ({ photos, removePhoto }) => {
             style={{ position: "relative", display: "inline-block" }}
           >
             <img
-              src={"http://localhost:8000/uploads/" + link}
+              src={"/uploads/" + link}
               style={{ width: "140px", height: "140px" }}
             />
             <button

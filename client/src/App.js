@@ -8,8 +8,6 @@ import History from "./components/History/History";
 import Query from "./components/Query/Query";
 import AuthProvider from "./store/AuthProvider";
 
-axios.defaults.baseURL = "http://localhost:8000";
-
 const router = createBrowserRouter([
   {
     path: "/",
